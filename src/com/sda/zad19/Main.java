@@ -2,6 +2,8 @@ package com.sda.zad19;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -43,13 +45,13 @@ public class Main {
         System.out.println("2. Największą liczbę zwrotek napisał/ła " + result.getCreator().getSurname());
 
 
-        String finalResult = Arrays.stream(poems)
+        List<String> finalResult = Arrays.stream(poems)
                 .max(Comparator.comparing(Poem::getStropheNumbers))
                 .map(Poem::getCreator)
                 .map(Author::getSurname)
-                .get();
+                .stream().collect(Collectors.toList());
 
 
-        System.out.println("3. Największą liczbę zwrotek napisał/ła " + finalResult);
+        finalResult.forEach(System.out::println);
     }
 }
